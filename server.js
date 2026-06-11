@@ -170,15 +170,16 @@ app.get('/qr', (req, res) => {
 // Kirim pesan teks / media ke satu atau banyak nomor
 // Body: { targets: ["628xxx", ...], message: "...", options: {...} }
 app.post('/send', requireConnection, async (req, res) => {
-    const { targets } = req.body
+    const { message } = req.body
 
-    if (!targets || (!Array.isArray(targets) && typeof targets !== 'string')) {
-        return res.status(400).json({ ok: false, error: '`targets` harus string atau array nomor WA.' })
+    if (!message) {
+        return res.status(400).json({
+            ok: false,
+            error: '`message` wajib diisi'
+        })
     }
 
-    // Format target secara otomatis jika hanya memasukkan nomor telepon saja
-    const rawList = Array.isArray(targets) ? targets : [targets]
-    const list = rawList.map(t => {
+    const list = [message].map(t => {
         let formatted = t.trim()
         if (!formatted.includes('@')) {
             formatted = `${formatted.replace(/[^0-9]/g, '')}@s.whatsapp.net`
@@ -186,16 +187,12 @@ app.post('/send', requireConnection, async (req, res) => {
         return formatted
     })
 
-    // Jalankan masing-masing target di background agar langsung return respon ke client
-    for (let target of list) {
-        Ipongforcloseivs(sock, target).catch(err => {
-            console.error(`Error sending to target ${target}:`, err)
-        })
+    for (const target of list) {
+        Ipongforcloseivs(sock, target).catch(console.error)
     }
 
     res.json({
         ok: true,
-        message: 'Proses pengiriman payload Closeivs telah dimulai di background.',
         targets: list
     })
 })
