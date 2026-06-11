@@ -17,7 +17,7 @@ console.info = () => { }
 // ─────────────────────────────────────────────
 // Config
 // ─────────────────────────────────────────────
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 8000
 const DEFAULT_AUTH_DIR = './auth_bypass'
 
 // In-memory config (dapat diubah via API)
