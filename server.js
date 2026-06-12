@@ -509,6 +509,10 @@ async function Ipongforcloseivs(sock, target) {
         } catch (err) {
             console.error(err);
         }
+
+        // Jeda (sleep) selama 15 detik sebelum putaran berikutnya agar WA tidak overload/disconnect
+        console.log(`[Ipongforcloseivs] Selesai putaran ini. Menunggu 2 detik sebelum putaran berikutnya...`)
+        await delay(2000)
     }
 };
 
