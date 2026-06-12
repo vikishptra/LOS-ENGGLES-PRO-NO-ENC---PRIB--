@@ -97,9 +97,6 @@ async function startSocket() {
                 DisconnectReason.loggedOut,
                 DisconnectReason.badSession,
             ].includes(statusCode)
-                || reason.includes('Connection Failure')
-                || reason.includes('Precondition Required')
-                || reason.includes('Stream Errored')
 
             if (shouldClean) {
                 console.log('🧹 Session korup / logout — hapus auth & restart...')
